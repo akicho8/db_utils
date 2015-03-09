@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require "bundler/setup"
+require "db_utils"
+DbUtils::TableShow.new.run(*ARGV)

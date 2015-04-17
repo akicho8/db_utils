@@ -1,0 +1,23 @@
+defaults: &defaults
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password:
+  host: 127.0.0.1
+
+development:
+  blue:
+    <<: *defaults
+    database: _kamome_blue_development
+  green:
+    <<: *defaults
+    database: _kamome_green_development
+
+test:
+  blue:
+    <<: *defaults
+    database: _kamome_blue_test
+  green:
+    <<: *defaults
+    database: _kamome_green_test

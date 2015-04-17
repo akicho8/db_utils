@@ -23,6 +23,13 @@ module DbUtils
           list += db_hash.values
         end
 
+        file = Pathname("config/kamome.yml")
+        if file.exist?
+          db_hash = YAML.load(ERB.new(file.read).result(binding))
+          db_hash = db_hash.except("defaults")
+          list += db_hash.flat_map {|env, blue_green| blue_green.values }
+        end
+
         file = Pathname("config/shards.yml")
         if file.exist?
           shards_hash = YAML.load(ERB.new(file.read).result(binding))
@@ -113,7 +120,8 @@ module DbUtils
           begin
             ActiveRecord::Base.establish_connection(config)
             count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{table}")
-            row[config["database"].sub(/\A\w+?_/, "").sub(/development/, "dev")] = count
+            column = config["database"].sub(/\A\w+?_/, "").sub(/development/, "dev")
+            row[column] = count
           rescue
           end
         end

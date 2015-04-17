@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 require 'test_helper'
 
+Test::Unit.at_start do
+  Dir.chdir("test/myapp") do
+    Bundler.clean_system("bin/setup")
+  end
+end
+
 class TestDbUtils < Test::Unit::TestCase
   test "DbShow" do
     Dir.chdir("test/myapp") do

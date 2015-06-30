@@ -23,6 +23,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activerecord"
   spec.add_dependency "rain_table"
-  spec.add_dependency "mysql2"
-  spec.add_dependency "sqlite3"
+  spec.add_development_dependency "mysql2"
+  spec.add_development_dependency "sqlite3"
 end
